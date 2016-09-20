@@ -1,10 +1,19 @@
 # slack-cleaner
-A Python tool to clean old messages from Slack
+A Python tool to clean old messages from Slack. This tool, when used with an admin token, will delete messages of _all_ users of a domain.
 
-## How to Use
+## Usage
 1. Get a token from https://api.slack.com/ (best done if you are an admin, since then you can delete files of _all_ users)
-2. Be sure to have python, and also the requests library from http://docs.python-requests.org/en/latest/user/install/#install
-3. Invoke the tool as `python slack-cleaner.py -t slacktoken [-n numdays]` or `python slack-cleaner.py --token slacktoken [--num-days numdays]` (The default `num-days` is 30)
+2. Change the `_domain` variable from `mykaarma` to your slack subdomain domain.
+3. Be sure to have python, and also the requests library from http://docs.python-requests.org/en/latest/user/install/#install
+4. Invoke the tool as
+```
+python slack-cleaner.py -t slacktoken [-n numdays]
+``` 
+or 
+```
+python slack-cleaner.py --token slacktoken [--num-days numdays]
+```
+(The default `num-days` is 30)
 
 ## License and Copyright
 ```
