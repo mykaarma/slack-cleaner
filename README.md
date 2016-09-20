@@ -1,5 +1,5 @@
 # slack-cleaner
-A Python tool to clean old messages from Slack. This tool, when used with an admin token, will delete messages of _all_ users of a domain.
+A Python tool to delete old files from Slack. This tool, when used with an admin token, will delete files of _all_ users of a domain.
 
 ## Usage
 1. Get a token from https://api.slack.com/ (best done if you are an admin, since then you can delete files of _all_ users)
