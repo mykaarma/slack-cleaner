@@ -23,7 +23,6 @@ A Python tool to clean old messages from Slack
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 ##############################################################################################
-
-# Inspired by http://www.shiftedup.com/2014/11/13/how-to-bulk-remove-files-from-slack 
-# and then additions by animeshpathak@mykaarma
 ```
+Inspired by http://www.shiftedup.com/2014/11/13/how-to-bulk-remove-files-from-slack and then additions by animeshpathak@mykaarma
+
