@@ -3,7 +3,7 @@ A Python tool to clean old messages from Slack. This tool, when used with an adm
 
 ## Usage
 1. Get a token from https://api.slack.com/ (best done if you are an admin, since then you can delete files of _all_ users)
-2. Change the `_domain` variable from `mykaarma` to your slack subdomain domain.
+2. Change the `_domain` variable from `mykaarma` to your slack subdomain.
 3. Be sure to have python, and also the requests library from http://docs.python-requests.org/en/latest/user/install/#install
 4. Invoke the tool as
 ```
