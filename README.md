@@ -1,8 +1,8 @@
 # slack-cleaner
-A Python tool to delete old files from Slack. This tool, when used with an admin token, will delete files of _all_ users of a domain.
+A Python tool to delete old files from Slack. This tool, when used with an admin token, will delete _public_ files of _all_ users of a domain.
 
 ## Usage
-1. Get a token from https://api.slack.com/ (best done if you are an admin, since then you can delete files of _all_ users)
+1. Get a token from https://api.slack.com/docs/oauth-test-tokens/ 
 2. Change the `_domain` variable from `myslacksubdomain` to your slack subdomain. E.g, if your URL is `mycompany.slack.com`, set `_domain` to `mycompany`
 3. Be sure to have python, and also the requests library from http://docs.python-requests.org/en/latest/user/install/#install
 4. Invoke the tool as
