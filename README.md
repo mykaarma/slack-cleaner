@@ -2,18 +2,23 @@
 A Python tool to delete old files from Slack. This tool, when used with an admin token, will delete _public_ files of _all_ users of a domain.
 
 ## Usage
-1. Get a token from https://api.slack.com/docs/oauth-test-tokens/ 
-2. Change the `_domain` variable from `myslacksubdomain` to your slack subdomain. E.g, if your URL is `mycompany.slack.com`, set `_domain` to `mycompany`
+1. Get a token from https://api.slack.com/docs/oauth-test-tokens/ (you may need to log in)
+2. In the `.py` file, change the `_domain` variable from `myslacksubdomain` to your slack subdomain. E.g, if your URL is `mycompany.slack.com`, set `_domain` to `mycompany`
 3. Be sure to have python, and also the requests library from http://docs.python-requests.org/en/latest/user/install/#install
 4. Invoke the tool as
 ```
-python slack-cleaner.py -t slacktoken [-n numdays]
+python slack-cleaner.py -t slacktoken [-n numdays] [-u username]
 ``` 
 or 
 ```
-python slack-cleaner.py --token slacktoken [--num-days numdays]
+python slack-cleaner.py --token slacktoken [--num-days numdays] [--username user_name]
 ```
-(The default `num-days` is 30)
+(The default `num-days` is 30 and if `username` is not provided, it tries to delete files for all users that are visible to the user whose token is being used. Admins can delete everyone's files)
+
+## Troubleshooting
+**I keep seeing the same filed tried to be deleted over and over again**
+This is likely because you are not an admin; try adding the `-u myusername` argument to the command line.
+
 
 ## License and Copyright
 ```
