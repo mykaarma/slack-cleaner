@@ -57,7 +57,7 @@ def delete_old_files(_token,u, num_days):
                 "set_active": "true", 
                 "_attempts": "1"})
             if DEBUG_PRINT:
-                print response
+                print response,
             print "success!"
             count = count + 1
     print "\tDONE! %d files deleted." % count
