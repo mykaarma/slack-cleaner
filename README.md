@@ -17,6 +17,7 @@ python slack-cleaner.py --token slacktoken [--num-days numdays] [--username user
 
 ## Troubleshooting
 **I keep seeing the same filed tried to be deleted over and over again**
+
 This is likely because you are not an admin; try adding the `-u myusername` argument to the command line.
 
 
