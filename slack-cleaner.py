@@ -26,7 +26,7 @@ from datetime import datetime, timedelta
 
 DEBUG_PRINT = False
 
-_domain = "myslacksubdomain"
+_domain = "myslackdomain"
 NUM_DAYS = 15
 
 def delete_old_files(_token,u, num_days):
@@ -46,16 +46,18 @@ def delete_old_files(_token,u, num_days):
         for f in response.json()["files"]:
             try:
                 #The encoding to UTF-8 is needed for files with weird names.
-                print "\tDeleting file " + f["name"].encode("utf-8") + "...",
+                print "\tDeleting file %s (%s) ... " % (f["name"].encode("utf-8") , f["id"]),
             except Error:
                 print "\tcannot decode filename, but I will delete something :) ...",
             timestamp = str(calendar.timegm(datetime.now().utctimetuple()))
             delete_url = "https://" + _domain + ".slack.com/api/files.delete?t=" + timestamp
-            requests.post(delete_url, data = {
+            response = requests.post(delete_url, data = {
                 "token": _token, 
                 "file": f["id"], 
                 "set_active": "true", 
                 "_attempts": "1"})
+            if DEBUG_PRINT:
+                print response
             print "success!"
             count = count + 1
     print "\tDONE! %d files deleted." % count
@@ -77,21 +79,22 @@ def list_all_users(_token):
         if DEBUG_PRINT:
             print "%s: %s " % (u["id"], u["name"])
         user_list.append({'id':u["id"],'name':u["name"]})
-    print "user listing complete."
+    if DEBUG_PRINT:
+        print "user listing complete."
     return user_list
     
 def usage():
     """
     prints usage
     """
-    print "python slack-cleaner.py -t slacktoken [-n numdays]"
-    print "python slack-cleaner.py --token slacktoken [--num-days numdays]"
-    print "default num-days is %d" % NUM_DAYS
+    print "python slack-cleaner.py -t slacktoken [-n numdays] [-u username]"
+    print "python slack-cleaner.py --token slacktoken [--num-days numdays] [--username user_name]"
+    print "default num-days is %d, and by default it tries to delete files of all users" % NUM_DAYS
     
 if __name__ == '__main__':
     import getopt, sys
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "ht:n:", ["help", "token=","num-days="])
+        opts, args = getopt.getopt(sys.argv[1:], "ht:n:u:", ["help", "token=","num-days=","username="])
     except getopt.GetoptError as err:
         # print help information and exit:
         print str(err)  # will print something like "option -a not recognized"
@@ -108,6 +111,8 @@ if __name__ == '__main__':
             token = a
         elif o in ("-n", "--num-days"):
             NUM_DAYS = int(a)
+        elif o in ("-u", "--username"):
+            username = a
         else:
             assert False, "unhandled option"
 
@@ -119,8 +124,9 @@ if __name__ == '__main__':
     print "%d users found, proceeding to delete files older than % d days..." % (len(user_list),NUM_DAYS)
     total = 0
     for u in user_list:
-        print "Deleting files for %s: %s ..." % (u["id"], u["name"]),
-        count = delete_old_files(token,u,NUM_DAYS)
-        print "%d deleted!" % count
-        total = total + count
+        if (not username or u["name"] == username):
+            print "Deleting files for %s: %s ..." % (u["id"], u["name"]),
+            count = delete_old_files(token,u,NUM_DAYS)
+            print "%d deleted!" % count
+            total = total + count
     print "%d files deleted in total" % total
