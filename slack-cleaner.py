@@ -47,7 +47,7 @@ def delete_old_files(_token,u, num_days):
             try:
                 #The encoding to UTF-8 is needed for files with weird names.
                 print "\tDeleting file %s (%s) ... " % (f["name"].encode("utf-8") , f["id"]),
-            except Error:
+            except:
                 print "\tcannot decode filename, but I will delete something :) ...",
             timestamp = str(calendar.timegm(datetime.now().utctimetuple()))
             delete_url = "https://" + _domain + ".slack.com/api/files.delete?t=" + timestamp
