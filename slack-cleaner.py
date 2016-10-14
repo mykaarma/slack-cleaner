@@ -101,6 +101,7 @@ if __name__ == '__main__':
         usage()
         sys.exit(2)
     token = None
+    username = None
     for o, a in opts:
         if DEBUG_PRINT:
             print "%s = %s" % (o,a)
