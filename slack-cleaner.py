@@ -26,7 +26,7 @@ from datetime import datetime, timedelta
 
 DEBUG_PRINT = False
 
-_domain = "myslackdomain"
+_domain = "myslacksubdomain"
 NUM_DAYS = 15
 
 def delete_old_files(_token,u, num_days):
